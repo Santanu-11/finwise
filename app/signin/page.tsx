@@ -103,6 +103,24 @@ return (
             />
             Continue with Google
           </button>
+          <button
+            type="button"
+            className=" w-full flex items-center justify-center gap-2 rounded-xl border bg-indigo-600 text-white hover:bg-indigo-700"
+            onClick={async () => {
+              const res = await fetch("/api/auth/demo", { method: "POST" });
+              const data = await res.json();
+              if (data.ok) {
+                await signIn("credentials", {
+                  email: data.demoEmail,
+                  password: data.demoPassword,
+                  callbackUrl: "/dashboard",
+                });
+              }
+            }}
+          >
+            Try Demo
+          </button>
+
         </form>
 
         {/* Footer */}
